@@ -76,7 +76,7 @@ class UserResource extends Resource
                             ->minLength(8)
                             ->same('passwordConfirmation')
                             ->dehydrated(fn ($state): bool => filled($state))
-                            ->dehydrateStateUsing(fn ($state): string => Hash::make($state)),
+                            ->dehydrateStateUsing(fn ($state): string => \Hash::make($state)),
                         
                         Forms\Components\TextInput::make('passwordConfirmation')
                             ->password()
