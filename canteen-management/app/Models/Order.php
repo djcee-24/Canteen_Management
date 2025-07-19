@@ -50,6 +50,16 @@ class Order extends Model
                 $order->order_number = 'ORD-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));
             }
         });
+
+        static::created(function ($order) {
+            event(new \App\Events\NewOrderPlaced($order));
+        });
+
+        static::updated(function ($order) {
+            if ($order->wasChanged('status')) {
+                event(new \App\Events\OrderStatusUpdated($order));
+            }
+        });
     }
 
     public function customer(): BelongsTo
