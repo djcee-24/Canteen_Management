@@ -84,15 +84,17 @@ class ExpenseResource extends Resource
                 Tables\Columns\TextColumn::make('amount')
                     ->money('USD')
                     ->sortable(),
-                Tables\Columns\BadgeColumn::make('category')
-                    ->colors([
-                        'primary' => 'utilities',
-                        'success' => 'supplies',
-                        'warning' => 'maintenance',
-                        'danger' => 'salaries',
-                        'info' => 'marketing',
-                        'secondary' => 'other',
-                    ]),
+                Tables\Columns\TextColumn::make('category')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'utilities' => 'primary',
+                        'supplies' => 'success',
+                        'maintenance' => 'warning',
+                        'salaries' => 'danger',
+                        'marketing' => 'info',
+                        'other' => 'secondary',
+                        default => 'gray',
+                    }),
                 Tables\Columns\TextColumn::make('expense_date')
                     ->date()
                     ->sortable(),

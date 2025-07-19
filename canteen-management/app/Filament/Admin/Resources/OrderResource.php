@@ -167,25 +167,31 @@ class OrderResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\BadgeColumn::make('order_type')
-                    ->colors([
-                        'primary' => 'dine_in',
-                        'success' => 'takeaway',
-                        'warning' => 'online',
-                    ]),
-                Tables\Columns\BadgeColumn::make('status')
-                    ->colors([
-                        'danger' => ['pending', 'cancelled'],
-                        'warning' => ['confirmed', 'preparing'],
-                        'primary' => 'ready',
-                        'success' => 'completed',
-                    ]),
-                Tables\Columns\BadgeColumn::make('payment_status')
-                    ->colors([
-                        'danger' => ['pending', 'failed'],
-                        'success' => 'paid',
-                        'warning' => 'refunded',
-                    ]),
+                Tables\Columns\TextColumn::make('order_type')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'dine_in' => 'primary',
+                        'takeaway' => 'success',
+                        'online' => 'warning',
+                        default => 'gray',
+                    }),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending', 'cancelled' => 'danger',
+                        'confirmed', 'preparing' => 'warning',
+                        'ready' => 'primary',
+                        'completed' => 'success',
+                        default => 'gray',
+                    }),
+                Tables\Columns\TextColumn::make('payment_status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending', 'failed' => 'danger',
+                        'paid' => 'success',
+                        'refunded' => 'warning',
+                        default => 'gray',
+                    }),
                 Tables\Columns\TextColumn::make('total_amount')
                     ->money('USD')
                     ->sortable(),

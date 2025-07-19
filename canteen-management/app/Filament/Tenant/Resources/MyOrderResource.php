@@ -96,19 +96,23 @@ class MyOrderResource extends Resource
                 Tables\Columns\TextColumn::make('customer_name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\BadgeColumn::make('order_type')
-                    ->colors([
-                        'primary' => 'dine_in',
-                        'success' => 'takeaway',
-                        'warning' => 'online',
-                    ]),
-                Tables\Columns\BadgeColumn::make('status')
-                    ->colors([
-                        'danger' => ['pending', 'cancelled'],
-                        'warning' => ['confirmed', 'preparing'],
-                        'primary' => 'ready',
-                        'success' => 'completed',
-                    ]),
+                Tables\Columns\TextColumn::make('order_type')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'dine_in' => 'primary',
+                        'takeaway' => 'success',
+                        'online' => 'warning',
+                        default => 'gray',
+                    }),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending', 'cancelled' => 'danger',
+                        'confirmed', 'preparing' => 'warning',
+                        'ready' => 'primary',
+                        'completed' => 'success',
+                        default => 'gray',
+                    }),
                 Tables\Columns\TextColumn::make('orderItems')
                     ->label('My Items')
                     ->formatStateUsing(function ($record) {
@@ -145,11 +149,11 @@ class MyOrderResource extends Resource
                         return $query
                             ->when(
                                 $data['created_from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                                fn (Builder $q, $date): Builder => $q->whereDate('created_at', '>=', $date),
                             )
                             ->when(
                                 $data['created_until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                                fn (Builder $q, $date): Builder => $q->whereDate('created_at', '<=', $date),
                             );
                     }),
             ])

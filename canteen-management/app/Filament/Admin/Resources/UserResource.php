@@ -122,14 +122,16 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\BadgeColumn::make('user_type')
-                    ->colors([
-                        'danger' => 'admin',
-                        'primary' => 'tenant',
-                        'success' => 'customer',
-                        'warning' => 'staff',
-                        'secondary' => 'guest',
-                    ]),
+                Tables\Columns\TextColumn::make('user_type')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'admin' => 'danger',
+                        'tenant' => 'primary',
+                        'customer' => 'success',
+                        'staff' => 'warning',
+                        'guest' => 'secondary',
+                        default => 'gray',
+                    }),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->badge()
                     ->separator(',')
