@@ -7,6 +7,7 @@ use App\Models\MenuItem;
 use App\Models\MenuCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -39,7 +40,9 @@ class MyMenuItemResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', \Illuminate\Support\Str::slug($state))),
+                            ->afterStateUpdated(function ($state, Set $set) {
+                                $set('slug', \Illuminate\Support\Str::slug($state));
+                            }),
                         
                         Forms\Components\TextInput::make('slug')
                             ->required()
