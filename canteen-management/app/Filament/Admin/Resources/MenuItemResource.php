@@ -57,7 +57,7 @@ class MenuItemResource extends Resource
                         Forms\Components\TextInput::make('price')
                             ->required()
                             ->numeric()
-                            ->prefix('$')
+                            ->prefix('₱')
                             ->step(0.01),
                         
                         Forms\Components\TextInput::make('preparation_time')
@@ -129,7 +129,7 @@ class MenuItemResource extends Resource
                     ->label('Owner')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->money('USD')
+                    ->money('PHP')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('preparation_time')
                     ->numeric()

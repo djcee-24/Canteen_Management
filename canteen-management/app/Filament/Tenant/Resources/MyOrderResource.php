@@ -127,7 +127,7 @@ class MyOrderResource extends Resource
                         $myTotal = $record->orderItems->filter(function ($item) {
                             return $item->menuItem && $item->menuItem->user_id === auth()->id();
                         })->sum('total_price');
-                        return '$' . number_format($myTotal, 2);
+                        return '₱' . number_format($myTotal, 2);
                     }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

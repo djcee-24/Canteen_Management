@@ -128,7 +128,7 @@ class Order extends Model
 
     public function getFormattedTotalAttribute()
     {
-        return '$' . number_format($this->total_amount, 2);
+        return '₱' . number_format($this->total_amount, 2);
     }
 
     public function getStatusColorAttribute()

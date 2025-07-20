@@ -56,7 +56,7 @@
                                 <!-- Details -->
                                 <div class="flex-1 min-w-0">
                                     <h4 class="text-lg font-medium text-gray-900">{{ $item['name'] }}</h4>
-                                    <p class="text-sm text-gray-600">${{ number_format($item['price'], 2) }} each</p>
+                                    <p class="text-sm text-gray-600">₱{{ number_format($item['price'], 2) }} each</p>
                                     @if(!empty($item['customizations']))
                                         <p class="text-xs text-gray-500 mt-1">
                                             @foreach($item['customizations'] as $key => $value)
@@ -86,7 +86,7 @@
                                 <!-- Price -->
                                 <div class="text-right">
                                     <p class="text-lg font-semibold text-gray-900">
-                                        ${{ number_format($item['price'] * $item['quantity'], 2) }}
+                                        ₱{{ number_format($item['price'] * $item['quantity'], 2) }}
                                     </p>
                                 </div>
 
@@ -192,16 +192,16 @@
                     <div class="space-y-3 mb-4">
                         <div class="flex justify-between text-sm">
                             <span class="text-gray-600">Subtotal:</span>
-                            <span class="font-medium">${{ number_format($subtotal, 2) }}</span>
+                            <span class="font-medium">₱{{ number_format($subtotal, 2) }}</span>
                         </div>
                         <div class="flex justify-between text-sm">
                             <span class="text-gray-600">Tax ({{ $taxRate * 100 }}%):</span>
-                            <span class="font-medium">${{ number_format($taxAmount, 2) }}</span>
+                            <span class="font-medium">₱{{ number_format($taxAmount, 2) }}</span>
                         </div>
                         <div class="border-t border-gray-200 pt-3">
                             <div class="flex justify-between">
                                 <span class="text-lg font-semibold text-gray-900">Total:</span>
-                                <span class="text-xl font-bold text-red-600">${{ number_format($total, 2) }}</span>
+                                <span class="text-xl font-bold text-red-600">₱{{ number_format($total, 2) }}</span>
                             </div>
                         </div>
                     </div>

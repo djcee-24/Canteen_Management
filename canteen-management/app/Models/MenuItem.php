@@ -100,7 +100,7 @@ class MenuItem extends Model
 
     public function getFormattedPriceAttribute()
     {
-        return '$' . number_format($this->price, 2);
+        return '₱' . number_format($this->price, 2);
     }
 
     public function isOwnedBy(User $user)

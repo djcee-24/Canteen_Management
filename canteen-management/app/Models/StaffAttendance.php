@@ -109,12 +109,12 @@ class StaffAttendance extends Model
 
     public function getFormattedDailyPayAttribute()
     {
-        return '$' . number_format($this->daily_pay, 2);
+        return '₱' . number_format($this->daily_pay, 2);
     }
 
     public function getFormattedHourlyRateAttribute()
     {
-        return '$' . number_format($this->hourly_rate, 2);
+        return '₱' . number_format($this->hourly_rate, 2);
     }
 
     public function getStatusColorAttribute()

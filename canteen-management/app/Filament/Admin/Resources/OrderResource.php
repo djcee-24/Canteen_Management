@@ -108,27 +108,27 @@ class OrderResource extends Resource
                         Forms\Components\TextInput::make('subtotal')
                             ->required()
                             ->numeric()
-                            ->prefix('$')
+                            ->prefix('₱')
                             ->step(0.01),
                         
                         Forms\Components\TextInput::make('tax_amount')
                             ->required()
                             ->numeric()
-                            ->prefix('$')
+                            ->prefix('₱')
                             ->step(0.01)
                             ->default(0),
                         
                         Forms\Components\TextInput::make('discount_amount')
                             ->required()
                             ->numeric()
-                            ->prefix('$')
+                            ->prefix('₱')
                             ->step(0.01)
                             ->default(0),
                         
                         Forms\Components\TextInput::make('total_amount')
                             ->required()
                             ->numeric()
-                            ->prefix('$')
+                            ->prefix('₱')
                             ->step(0.01),
                     ])
                     ->columns(2),
@@ -193,7 +193,7 @@ class OrderResource extends Resource
                         default => 'gray',
                     }),
                 Tables\Columns\TextColumn::make('total_amount')
-                    ->money('USD')
+                    ->money('PHP')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

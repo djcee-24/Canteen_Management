@@ -39,7 +39,7 @@ class ExpenseResource extends Resource
                         Forms\Components\TextInput::make('amount')
                             ->required()
                             ->numeric()
-                            ->prefix('$')
+                            ->prefix('₱')
                             ->step(0.01),
                         
                         Forms\Components\Select::make('category')
@@ -82,7 +82,7 @@ class ExpenseResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('amount')
-                    ->money('USD')
+                    ->money('PHP')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category')
                     ->badge()

@@ -58,12 +58,12 @@ class TenantRental extends Model
 
     public function getFormattedFeeAttribute()
     {
-        return '$' . number_format($this->monthly_rental_fee, 2);
+        return '₱' . number_format($this->monthly_rental_fee, 2);
     }
 
     public function getFormattedPaidAmountAttribute()
     {
-        return '$' . number_format($this->paid_amount, 2);
+        return '₱' . number_format($this->paid_amount, 2);
     }
 
     public function getRemainingAmountAttribute()
@@ -73,7 +73,7 @@ class TenantRental extends Model
 
     public function getFormattedRemainingAmountAttribute()
     {
-        return '$' . number_format($this->remaining_amount, 2);
+        return '₱' . number_format($this->remaining_amount, 2);
     }
 
     public function getStatusColorAttribute()

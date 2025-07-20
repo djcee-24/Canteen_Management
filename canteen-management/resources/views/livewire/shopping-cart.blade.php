@@ -65,7 +65,7 @@
                             <!-- Item Details -->
                             <div class="flex-1 min-w-0">
                                 <p class="text-sm font-medium text-gray-900 truncate">{{ $item['name'] }}</p>
-                                <p class="text-sm text-gray-500">${{ number_format($item['price'], 2) }} each</p>
+                                <p class="text-sm text-gray-500">₱{{ number_format($item['price'], 2) }} each</p>
                                 @if(!empty($item['customizations']))
                                     <p class="text-xs text-gray-400 mt-1">
                                         @foreach($item['customizations'] as $key => $value)
@@ -95,7 +95,7 @@
                             <!-- Item Total -->
                             <div class="text-right">
                                 <p class="text-sm font-semibold text-gray-900">
-                                    ${{ number_format($item['price'] * $item['quantity'], 2) }}
+                                    ₱{{ number_format($item['price'] * $item['quantity'], 2) }}
                                 </p>
                             </div>
 
@@ -124,7 +124,7 @@
                 <!-- Total -->
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-lg font-semibold text-gray-900">Total:</span>
-                    <span class="text-xl font-bold text-red-600">${{ number_format($cartTotal, 2) }}</span>
+                    <span class="text-xl font-bold text-red-600">₱{{ number_format($cartTotal, 2) }}</span>
                 </div>
 
                 <!-- Action Buttons -->

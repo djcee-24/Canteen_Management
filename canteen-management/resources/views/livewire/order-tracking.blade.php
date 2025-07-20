@@ -56,7 +56,7 @@
                     </div>
                     <div>
                         <span class="text-gray-500">Total:</span>
-                        <p class="font-medium text-lg">${{ number_format($order->total_amount, 2) }}</p>
+                        <p class="font-medium text-lg">₱{{ number_format($order->total_amount, 2) }}</p>
                     </div>
                 </div>
             </div>
@@ -150,13 +150,13 @@
                                 </div>
                                 <div class="text-right">
                                     <p class="text-sm text-gray-600">Qty: {{ $item->quantity }}</p>
-                                    <p class="font-medium">${{ number_format($item->total_price, 2) }}</p>
+                                    <p class="font-medium">₱{{ number_format($item->total_price, 2) }}</p>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 @else
-                    <p class="text-gray-600">{{ $order->orderItems->count() }} items • ${{ number_format($order->total_amount, 2) }}</p>
+                                            <p class="text-gray-600">{{ $order->orderItems->count() }} items • ₱{{ number_format($order->total_amount, 2) }}</p>
                 @endif
             </div>
 

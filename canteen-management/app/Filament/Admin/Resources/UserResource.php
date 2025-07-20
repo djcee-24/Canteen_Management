@@ -96,7 +96,7 @@ class UserResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('hourly_rate')
                             ->numeric()
-                            ->prefix('$')
+                            ->prefix('₱')
                             ->step(0.01)
                             ->visible(fn (Forms\Get $get) => in_array($get('user_type'), ['staff', 'tenant'])),
                         
@@ -139,7 +139,7 @@ class UserResource extends Resource
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('hourly_rate')
-                    ->money('USD')
+                    ->money('PHP')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('email_verified_at')

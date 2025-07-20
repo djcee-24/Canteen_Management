@@ -96,7 +96,7 @@
                             <p class="text-sm text-gray-600 mb-2">by {{ $item->user->name }}</p>
                         </div>
                         <div class="text-right">
-                            <span class="text-xl font-bold text-red-600">${{ number_format($item->price, 2) }}</span>
+                            <span class="text-xl font-bold text-red-600">₱{{ number_format($item->price, 2) }}</span>
                         </div>
                     </div>
 
