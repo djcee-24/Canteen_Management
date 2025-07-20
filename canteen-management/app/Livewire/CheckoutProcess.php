@@ -130,7 +130,7 @@ class CheckoutProcess extends Component
             // Create the order
             $order = Order::create([
                 'order_number' => $this->generateOrderNumber(),
-                'customer_id' => auth()->id(),
+                'customer_id' => auth()->user()?->getKey(),
                 'customer_name' => $this->customerName,
                 'customer_phone' => $this->customerPhone,
                 'customer_email' => $this->customerEmail,

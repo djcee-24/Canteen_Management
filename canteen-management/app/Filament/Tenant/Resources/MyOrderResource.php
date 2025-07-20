@@ -28,7 +28,7 @@ class MyOrderResource extends Resource
     {
         return parent::getEloquentQuery()
             ->whereHas('orderItems.menuItem', function (Builder $query) {
-                $query->where('user_id', auth()->id());
+                $query->where('user_id', auth()->user()?->getKey());
             });
     }
 
@@ -117,7 +117,7 @@ class MyOrderResource extends Resource
                     ->label('My Items')
                     ->formatStateUsing(function ($record) {
                         $myItems = $record->orderItems->filter(function ($item) {
-                            return $item->menuItem && $item->menuItem->user_id === auth()->id();
+                            return $item->menuItem && $item->menuItem->user_id === auth()->user()?->getKey();
                         });
                         return $myItems->count() . ' item(s)';
                     }),
@@ -125,7 +125,7 @@ class MyOrderResource extends Resource
                     ->label('My Total')
                     ->formatStateUsing(function ($record) {
                         $myTotal = $record->orderItems->filter(function ($item) {
-                            return $item->menuItem && $item->menuItem->user_id === auth()->id();
+                            return $item->menuItem && $item->menuItem->user_id === auth()->user()?->getKey();
                         })->sum('total_price');
                         return '₱' . number_format($myTotal, 2);
                     }),

@@ -216,11 +216,11 @@ class OrderResource extends Resource
                         return $query
                             ->when(
                                 $data['created_from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                                fn (Builder $q, $date): Builder => $q->whereDate('created_at', '>=', $date),
                             )
                             ->when(
                                 $data['created_until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                                fn (Builder $q, $date): Builder => $q->whereDate('created_at', '<=', $date),
                             );
                     }),
             ])

@@ -66,7 +66,7 @@ class ExpenseResource extends Resource
                         Forms\Components\Select::make('created_by')
                             ->label('Created By')
                             ->options(User::pluck('name', 'id'))
-                            ->default(auth()->id())
+                            ->default(auth()->user()?->getKey())
                             ->required()
                             ->searchable(),
                     ])
@@ -123,11 +123,11 @@ class ExpenseResource extends Resource
                         return $query
                             ->when(
                                 $data['date_from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('expense_date', '>=', $date),
+                                fn (Builder $q, $date): Builder => $q->whereDate('expense_date', '>=', $date),
                             )
                             ->when(
                                 $data['date_until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('expense_date', '<=', $date),
+                                fn (Builder $q, $date): Builder => $q->whereDate('expense_date', '<=', $date),
                             );
                     }),
             ])
