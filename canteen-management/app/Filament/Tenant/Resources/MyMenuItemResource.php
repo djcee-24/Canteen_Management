@@ -26,7 +26,7 @@ class MyMenuItemResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('user_id', auth()->id());
+        return parent::getEloquentQuery()->where('user_id', auth()->user()?->getKey());
     }
 
     public static function form(Form $form): Form
@@ -53,7 +53,7 @@ class MyMenuItemResource extends Resource
                             ->searchable(),
                         
                         Forms\Components\Hidden::make('user_id')
-                            ->default(auth()->id()),
+                            ->default(auth()->user()?->getKey()),
                         
                         Forms\Components\TextInput::make('price')
                             ->required()
