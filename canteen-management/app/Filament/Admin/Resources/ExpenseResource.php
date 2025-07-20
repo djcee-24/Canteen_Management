@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class ExpenseResource extends Resource
 {
@@ -66,7 +67,7 @@ class ExpenseResource extends Resource
                         Forms\Components\Select::make('created_by')
                             ->label('Created By')
                             ->options(User::pluck('name', 'id'))
-                            ->default(auth()->user()?->getKey())
+                            ->default(Auth::id())
                             ->required()
                             ->searchable(),
                     ])

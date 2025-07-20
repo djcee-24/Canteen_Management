@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class MyOrderResource extends Resource
 {
@@ -28,7 +29,7 @@ class MyOrderResource extends Resource
     {
         return parent::getEloquentQuery()
             ->whereHas('orderItems.menuItem', function (Builder $query) {
-                $query->where('user_id', auth()->user()?->getKey());
+                $query->where('user_id', Auth::id());
             });
     }
 
@@ -117,7 +118,7 @@ class MyOrderResource extends Resource
                     ->label('My Items')
                     ->formatStateUsing(function ($record) {
                         $myItems = $record->orderItems->filter(function ($item) {
-                            return $item->menuItem && $item->menuItem->user_id === auth()->user()?->getKey();
+                            return $item->menuItem && $item->menuItem->user_id === Auth::id();
                         });
                         return $myItems->count() . ' item(s)';
                     }),
@@ -125,7 +126,7 @@ class MyOrderResource extends Resource
                     ->label('My Total')
                     ->formatStateUsing(function ($record) {
                         $myTotal = $record->orderItems->filter(function ($item) {
-                            return $item->menuItem && $item->menuItem->user_id === auth()->user()?->getKey();
+                            return $item->menuItem && $item->menuItem->user_id === Auth::id();
                         })->sum('total_price');
                         return '₱' . number_format($myTotal, 2);
                     }),

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\MenuItem;
@@ -130,7 +131,7 @@ class CheckoutProcess extends Component
             // Create the order
             $order = Order::create([
                 'order_number' => $this->generateOrderNumber(),
-                'customer_id' => auth()->user()?->getKey(),
+                'customer_id' => Auth::id(),
                 'customer_name' => $this->customerName,
                 'customer_phone' => $this->customerPhone,
                 'customer_email' => $this->customerEmail,
